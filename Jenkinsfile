@@ -1,21 +1,17 @@
+properties([parameters([string('groupName'), string('sourceName')])])
 pipeline { 
     agent any 
     stages { 
-        stage('Git Checkout') { 
-            steps { 
-                echo "Checking out Git repo";
-            }
-        } 
-        
         stage('Get parameters') { 
             steps { 
-                echo "Getting vdb parameter details"; 
-            } 
+                sh 'python getParameters.py ${params.groupName} ${params.sourceName}'
+            }
         } 
         
         stage('Provision VDB') { 
             steps {
-                echo "Provisioning VDB"; 
+                echo "Provisioning VDB";
+                sh 'python start.py' 
             }
         }
     }
