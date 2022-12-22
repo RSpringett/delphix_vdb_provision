@@ -13,7 +13,7 @@ if __name__ == "__main__":
     
     for vdbName in vdbList: 
         os.system(f"python ProvisionVDB.py {vdbName} {groupReference} {dSourceReference}")
-        time.sleep(10)
+        time.sleep(60)
 
     # for vdb in vdbList: 
     #     print("about to...")
