@@ -2,16 +2,22 @@ properties([parameters([string('groupName'), string('sourceName')])])
 pipeline { 
     agent any 
     stages { 
+        stage('Git Checkout') {
+            steps {
+                bat 'git clone https://github.com/cameronbose/delphix_vdb_provision.git';
+            }
+        }
+        
         stage('Get parameters') { 
             steps { 
-                sh 'python getParameters.py ${params.groupName} ${params.sourceName}'
+                bat 'python getParameters.py ${params.groupName} ${params.sourceName}';
             }
         } 
         
         stage('Provision VDB') { 
             steps {
                 echo "Provisioning VDB";
-                sh 'python start.py' 
+                bat 'python start.py' 
             }
         }
     }
