@@ -4,6 +4,7 @@ pipeline {
     stages { 
         stage('Git Checkout') {
             steps {
+                bat 'rmdir /s /q delphix_vdb_provision';
                 bat 'git clone https://github.com/cameronbose/delphix_vdb_provision.git';
             }
         }
