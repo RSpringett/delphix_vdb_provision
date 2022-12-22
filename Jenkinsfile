@@ -11,7 +11,7 @@ pipeline {
         
         stage('Get parameters') { 
             steps { 
-                bat 'python getParameters.py ${params.groupName} ${params.sourceName}';
+                bat "python getParameters.py ${params.groupName} ${params.sourceName}";
             }
         } 
         
