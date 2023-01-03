@@ -5,6 +5,7 @@ configFile = open("configFile.txt", "r").read().splitlines()
 configList = [i.strip() for i in configFile]
 groupReference = configList[0]
 dSourceReference = configList[1]
+environmentInstanceReference = configList[2]
 
 vdbFile = open("vdbNames.txt", "r").read().splitlines()
 vdbList = [i.strip() for i in vdbFile]
@@ -12,7 +13,7 @@ vdbList = [i.strip() for i in vdbFile]
 if __name__ == "__main__": 
     
     for vdbName in vdbList: 
-        os.system(f"sh curlCommand.sh {vdbName} {groupReference} {dSourceReference}")
+        os.system(f"sh curlCommand.sh {vdbName} {groupReference} {dSourceReference} {environmentInstanceReference}")
         time.sleep(60)
 
     # for vdb in vdbList: 
