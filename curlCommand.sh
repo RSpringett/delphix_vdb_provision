@@ -3,7 +3,7 @@
 NAME=$1
 groupReference=$2
 dSourceReference=$3 
-
+instanceReference=$4
 
 curl -s -X POST -k --data @- http://10.44.1.160/resources/json/delphix/database/provision -b "cookies.txt" -H "Content-Type: application/json"<<EOF
 {
@@ -39,7 +39,7 @@ curl -s -X POST -k --data @- http://10.44.1.160/resources/json/delphix/database/
     "sourceConfig": {
         "type": "MSSqlSIConfig",
         "linkingEnabled": false,
-        "repository": "MSSQL_INSTANCE-1",
+        "repository": "${instanceReference}",
         "databaseName": "${NAME}",
         "recoveryModel": "SIMPLE",
         "mirroringState": "NONE"
@@ -52,3 +52,4 @@ curl -s -X POST -k --data @- http://10.44.1.160/resources/json/delphix/database/
     "masked": false
 }
 EOF 
+
