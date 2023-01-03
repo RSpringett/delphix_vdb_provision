@@ -14,7 +14,7 @@ if __name__ == "__main__":
     
     for vdbName in vdbList: 
         os.system(f"sh curlCommand.sh {vdbName} {groupReference} {dSourceReference} {environmentInstanceReference}")
-        time.sleep(60)
+        time.sleep(10)
 
     # for vdb in vdbList: 
     #     print("about to...")
