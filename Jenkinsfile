@@ -1,4 +1,4 @@
-properties([parameters([string('groupName'), string('sourceName')])])
+properties([parameters([choice(choices: ['MgtAppServer', 'SQL2019_Source', 'SQL2019_Target', 'linuxsource', 'linuxtarget'], name: 'Environment'), choice(choices: ['MSSQLSERVER', 'SQLEXPRESS', 'Unstructured Files'], name: 'environmentInstance'), string(name: 'groupName', trim: true), string(name: 'sourceName', trim: true)])])
 pipeline { 
     agent any 
     stages { 
@@ -11,7 +11,7 @@ pipeline {
         
         stage('Get parameters') { 
             steps { 
-                bat "python getParameters.py ${params.groupName} ${params.sourceName}";
+                bat "python getParameters.py ${params.groupName} ${params.sourceName} ${params.Environment} ${params.environmentInstance}";
             }
         } 
         
