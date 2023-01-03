@@ -12,7 +12,7 @@ vdbList = [i.strip() for i in vdbFile]
 if __name__ == "__main__": 
     
     for vdbName in vdbList: 
-        os.system(f"python ProvisionVDB.py {vdbName} {groupReference} {dSourceReference}")
+        os.system(f"sh curlCommand.sh {vdbName} {groupReference} {dSourceReference}")
         time.sleep(60)
 
     # for vdb in vdbList: 
