@@ -2,6 +2,14 @@ import os
 import json 
 import sys 
 
+
+versionDict = {'6.0.14.0':'1.11.14','6.0.15.0':'1.11.15','6.0.16.0':'1.11.16','6.0.17.0':'1.11.17'}
+
+def getAPIVersion(delphixVersion):
+    apiVersion = versionDict[delphixVersion]
+    major,minor,micro = apiVersion.split('.')
+    return major,minor,micro 
+
 def getGroupReferenceID(groupName):
     APIQuery = os.popen('curl -X GET -k http://10.44.1.160/resources/json/delphix/group -b "cookies.txt" -H "Content-Type: application/json"').read()
     queryDict = json.loads(APIQuery)
@@ -38,13 +46,20 @@ def getEnvironmentInstance(instanceName, environmentReference):
 
 
 if __name__ == "__main__": 
-    print("Logging in")
-    os.system("sh login.sh")
-
+    
     groupName = sys.argv[1] 
     sourceName = sys.argv[2] 
     environmentName = sys.argv[3]
     environmentInstance = sys.argv[4]
+    username = sys.argv[5]
+    password = sys.argv[6]
+    dxEngineAddress = sys.argv[7]
+    delphixVersion = sys.argv[8]
+
+    major,minor,micro = getAPIVersion(delphixVersion)
+
+    print("Logging on --->")
+    os.system(f"sh login.sh {username} {password} {dxEngineAddress} {major} {minor} {micro}")
 
     groupReference = getGroupReferenceID(groupName)
     dSourceReference = getdSourceContainerID(sourceName)
@@ -52,6 +67,5 @@ if __name__ == "__main__":
     instanceReference = getEnvironmentInstance(environmentInstance, environmentReference)
 
     with open("configFile.txt", "w") as configFile: 
-        configFile.write(f"{groupReference}\n{dSourceReference}\n{instanceReference}")
-        
+        configFile.write(f"{groupReference}\n{dSourceReference}\n{instanceReference}\n{dxEngineAddress}")
 
