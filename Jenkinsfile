@@ -1,4 +1,4 @@
-properties([parameters([choice(choices: ['MgtAppServer', 'SQL2019_Source', 'SQL2019_Target', 'linuxsource', 'linuxtarget'], name: 'Environment'), choice(choices: ['MSSQLSERVER', 'SQLEXPRESS', 'Unstructured Files'], name: 'environmentInstance'), string(name: 'groupName', trim: true), string(name: 'sourceName', trim: true)])])
+properties([parameters([choice(choices: ['MgtAppServer', 'SQL2019_Source', 'SQL2019_Target', 'linuxsource', 'linuxtarget'], name: 'Environment'), choice(choices: ['MSSQLSERVER', 'SQLEXPRESS', 'Unstructured Files'], name: 'environmentInstance'), choice(choices: ['6.0.14.0', '6.0.15.0', '6.0.16.0', '6.0.17.0'], name: 'dxVersion'), password(defaultValueAsSecret: <object of type hudson.util.Secret>, name: 'password'), string(name: 'groupName', trim: true), string(name: 'sourceName', trim: true), string(defaultValue: 'admin', name: 'username', trim: true), string(defaultValue: '10.44.1.160', name: 'dxEngineAddress', trim: true)])])
 pipeline { 
     agent any 
     stages { 
@@ -11,7 +11,7 @@ pipeline {
         
         stage('Get parameters') { 
             steps { 
-                bat "python getParameters.py ${params.groupName} ${params.sourceName} ${params.Environment} ${params.environmentInstance}";
+                bat "python getParameters.py ${params.groupName} ${params.sourceName} ${params.Environment} ${params.environmentInstance} ${params.username} ${params.password} ${params.dxEngineAddress} ${params.dxVersion}";
             }
         } 
         
@@ -41,3 +41,4 @@ pipeline {
         }
     }
 }
+
