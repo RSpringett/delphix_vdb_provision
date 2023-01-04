@@ -4,8 +4,9 @@ NAME=$1
 groupReference=$2
 dSourceReference=$3 
 instanceReference=$4
+dxEngineAddress=$5
 
-curl -s -X POST -k --data @- http://10.44.1.160/resources/json/delphix/database/provision -b "cookies.txt" -H "Content-Type: application/json"<<EOF
+curl -s -X POST -k --data @- http://${dxEngineAddress}/resources/json/delphix/database/provision -b "cookies.txt" -H "Content-Type: application/json"<<EOF
 {
     "type": "MSSqlProvisionParameters",
     "container": {
