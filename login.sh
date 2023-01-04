@@ -1,22 +1,30 @@
 #!/bin/bash
-curl -s -X POST -k --data @- http://10.44.1.160/resources/json/delphix/session \
+
+username=$1
+password=$2 
+dxEngineAddress=$3 
+major=$4
+minor=$5
+micro=$6
+
+curl -s -X POST -k --data @- http://${dxEngineAddress}/resources/json/delphix/session \
    -c "cookies.txt" -H "Content-Type: application/json" <<EOF
 {
    "type": "APISession",
    "version": {
        "type": "APIVersion",
-       "major": 1,
-       "minor": 11,
-       "micro": 14
+       "major": ${major},
+       "minor": ${minor},
+       "micro": ${micro}
   }
 }
 EOF
 
-curl -s -X POST -k --data @- http://10.44.1.160/resources/json/delphix/login \
+curl -s -X POST -k --data @- http://${dxEngineAddress}/resources/json/delphix/login \
 -b "cookies.txt" -c "cookies.txt" -H "Content-Type: application/json" <<EOF
 {
 "type": "LoginRequest",
-"username": "admin",
-"password": "fwdview01!"
+"username": "${username}",
+"password": "${password}"
 }
 EOF
