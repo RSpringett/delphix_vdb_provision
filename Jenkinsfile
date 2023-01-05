@@ -1,5 +1,4 @@
-properties([parameters([string(defaultValue: 'admin', name: 'username', trim: true), password(name: 'password'), string(defaultValue: '10.44.1.160', name: 'dxEngineAddress', trim: true), string(name: 'groupName', trim: true), string(name: 'sourceName', trim: true), choice(choices: ['MgtAppServer', 'SQL2019_Source', 'SQL2019_Target', 'linuxsource', 'linuxtarget'], name: 'Environment'), choice(choices: ['MSSQLSERVER', 'SQLEXPRESS', 'Unstructured Files'], name: 'environmentInstance'), choice(choices: ['6.0.14.0', '6.0.15.0', '6.0.16.0', '6.0.17.0'], name: 'dxVersion')])])
-
+properties([parameters([string(defaultValue: 'admin', name: 'username', trim: true), password(name: 'password'), string(defaultValue: '10.44.1.160', name: 'dxEngineAddress', trim: true), choice(choices: ['6.0.14.0', '6.0.15.0', '6.0.16.0', '6.0.17.0'], name: 'dxVersion'), string(name: 'groupName', trim: true), string(name: 'sourceName', trim: true), choice(choices: ['MgtAppServer', 'SQL2019_Source', 'SQL2019_Target', 'linuxsource', 'linuxtarget'], name: 'Environment'), choice(choices: ['MSSQLSERVER', 'SQLEXPRESS', 'Unstructured Files'], name: 'environmentInstance')])])
 pipeline { 
     agent any 
     stages { 
