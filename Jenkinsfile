@@ -10,8 +10,12 @@ pipeline {
         }
         
         stage('Get parameters') { 
-            steps { 
-                bat "python getParameters.py ${params.groupName} ${params.sourceName} ${params.Environment} ${params.environmentInstance} ${params.username} ${params.password} ${params.dxEngineAddress} ${params.dxVersion}";
+            steps {
+                script {
+                    withCredentials([string(credentialsId:'', variable: 'SECRET_PASSWORD', passwordVariable: 'password')]) { 
+                        bat "python getParameters.py ${params.groupName} ${params.sourceName} ${params.Environment} ${params.environmentInstance} ${params.username} ${SECRET_PASSWORD} ${params.dxEngineAddress} ${params.dxVersion}";
+                    }
+                }
             }
         } 
         
@@ -41,4 +45,3 @@ pipeline {
         }
     }
 }
-
