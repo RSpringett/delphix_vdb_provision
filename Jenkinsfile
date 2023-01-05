@@ -4,21 +4,21 @@ pipeline {
     stages { 
         stage('Git Checkout') {
             steps {
-                bat 'rmdir /s /q delphix_vdb_provision';
-                bat 'git clone https://github.com/cameronbose/delphix_vdb_provision.git';
+                sh 'rmdir /s /q delphix_vdb_provision';
+                sh 'git clone https://github.com/cameronbose/delphix_vdb_provision.git';
             }
         }
         
         stage('Get parameters') { 
             steps { 
-                bat "python getParameters.py ${params.groupName} ${params.sourceName}";
+                sh "python getParameters.py ${params.groupName} ${params.sourceName}";
             }
         } 
         
         stage('Provision VDB') { 
             steps {
                 echo "Provisioning VDB";
-                bat 'python start.py' 
+                sh 'python start.py' 
             }
         }
     }
